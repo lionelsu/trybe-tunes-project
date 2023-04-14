@@ -66,9 +66,9 @@ class Search extends React.Component {
               {`Resultado de álbuns de: ${artistName}`}
             </p>
             {albums.length > 0 ? (
-              <ul>
+              <div>
                 {albums.map((album) => (
-                  <li key={ album.collectionId }>
+                  <div key={ album.collectionId }>
                     <div>{album.collectionName}</div>
                     <Link
                       to={ `/album/${album.collectionId}` }
@@ -76,9 +76,9 @@ class Search extends React.Component {
                     >
                       Ver mais
                     </Link>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             ) : (
               <p>Nenhum álbum foi encontrado</p>
             )}
