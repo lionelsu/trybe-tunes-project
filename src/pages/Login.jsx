@@ -10,7 +10,7 @@ class Login extends React.Component {
     nameValid: false,
   };
 
-  handleChange = (event) => {
+  changer = (event) => {
     const { value } = event.target;
     const maxLength = 3;
     const nameValid = value.length >= maxLength;
@@ -39,7 +39,7 @@ class Login extends React.Component {
             <input
               type="text"
               data-testid="login-name-input"
-              onChange={ this.handleChange }
+              onChange={ this.changer }
             />
             <button
               type="submit"
