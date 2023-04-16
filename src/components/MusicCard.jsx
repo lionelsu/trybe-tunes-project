@@ -1,13 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from '../pages/Loading';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   state = {
     favorite: false,
     loading: false,
   };
+
+  async componentDidMount() {
+    const { trackId } = this.props;
+    const favoriteMusics = await getFavoriteSongs();
+    const isFavorite = favoriteMusics.some((music) => music.trackId === trackId);
+    if (isFavorite) {
+      this.setState({ favorite: true });
+    }
+  }
 
   checkBoxChanger = async () => {
     this.setState((prevState) => ({
@@ -19,7 +28,7 @@ class MusicCard extends React.Component {
   };
 
   makeFavorite() {
-    const { trackId } = this.props;
+    const { trackId, isFavorite } = this.props;
     const { favorite } = this.state;
     return (
       <label
@@ -30,7 +39,7 @@ class MusicCard extends React.Component {
         <input
           type="checkbox"
           id={ trackId }
-          checked={ favorite }
+          checked={ favorite || isFavorite }
           onChange={ this.checkBoxChanger }
         />
       </label>
